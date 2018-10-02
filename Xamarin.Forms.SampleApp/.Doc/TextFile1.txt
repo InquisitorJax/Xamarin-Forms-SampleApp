@@ -1,0 +1,8 @@
+﻿Prism Library (navigation / Ioc / event aggregation)
+Offline Repository
+
+Todo:
+Global Exception Managements
+Logging
+Localization
+Theme Support

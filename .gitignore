@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/Xamarin.Forms.SampleApp/DesignTimeBuild
+/.vs/Xamarin.Forms.SampleApp/v15
+/Prism.TinyIoc.Forms/obj
+/Prism.TinyIoc.Forms/bin/Debug/netstandard2.0
+/Xamarin.Forms.SampleApp/bin/Debug/netstandard2.0
+/Xamarin.Forms.SampleApp/obj
+/Xamarin.Forms.SampleApp.Android/bin/Debug
+/Xamarin.Forms.SampleApp.Android/obj
+/Xamarin.Forms.SampleApp.iOS/obj
+/Xamarin.Forms.SampleApp.UWP/obj

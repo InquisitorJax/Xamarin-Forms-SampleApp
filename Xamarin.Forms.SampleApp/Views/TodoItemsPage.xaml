@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:controls="clr-namespace:Xamarin.Forms.SampleApp.Controls"
+			 x:Class="Xamarin.Forms.SampleApp.Views.TodoItemsPage">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Command="{Binding NavigateCommand}"
+					 CommandParameter="NavigationPageBase/TodoItemPage"
+                 Order="Primary"
+                 Priority="0">
+			<ToolbarItem.Icon>
+				<OnPlatform x:TypeArguments="FileImageSource">
+					<On Platform="Android" Value="ic_insert_dark.png" />
+					<On Platform="WinPhone" Value="Images/ic_insert_dark.png" />
+					<On Platform="iOS" Value="ic_insert.png" />
+				</OnPlatform>
+			</ToolbarItem.Icon>
+		</ToolbarItem>
+	</ContentPage.ToolbarItems>
+
+	<controls:ListViewEx ItemsSource="{Binding TodoItems}"
+						 ItemTapCommand="{Binding OpenSelectedTodoItemCommand}"
+						 RefreshCommand="{Binding FetchTodoItemsCommand}"
+						 IsPullToRefreshEnabled="True"
+						 SelectedItem="{Binding SelectedItem,
+                                                  Mode=TwoWay}" >
+
+		<ListView.ItemTemplate>
+			<DataTemplate>
+				<TextCell Text="{Binding Text}" />
+			</DataTemplate>
+		</ListView.ItemTemplate>
+	</controls:ListViewEx>
+</ContentPage>
