@@ -1,2 +1,2 @@
 # Xamarin-Forms-SampleApp
-Updated QuickStart Sample Application
+Updated QuickStart Master Detail Sample Application using Prism
