@@ -11,7 +11,7 @@ namespace Xamarin.Forms.SampleApp
 {
 	public interface IRepository
 	{
-		Task InitializeAsync();
+		void Initialize();
 
 		Task<FetchModelResult<T>> FetchItemAsync<T>(string id) where T : ModelBase, new();
 
@@ -43,7 +43,7 @@ namespace Xamarin.Forms.SampleApp
 			return retResult;
 		}
 
-		public async Task InitializeAsync()
+		public void Initialize()
 		{
 			if (_isInitialized)
 				return;
@@ -63,6 +63,7 @@ namespace Xamarin.Forms.SampleApp
 				Console.WriteLine("Error Creating Database Connection");
 			}
 
+			//TODO: _database.CreateTableAsync<TodoItem>() doesn't work?
 			var connection = _database.GetConnection();
 			connection.CreateTable<TodoItem>();
 		}

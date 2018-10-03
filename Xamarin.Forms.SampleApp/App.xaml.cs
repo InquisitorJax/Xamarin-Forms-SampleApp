@@ -2,7 +2,6 @@
 using Prism.DryIoc;
 using Prism.Events;
 using Prism.Ioc;
-using Prism.Navigation;
 using Xamarin.Forms.SampleApp.ViewModels;
 using Xamarin.Forms.SampleApp.Views;
 using Xamarin.Forms.Xaml;
@@ -37,8 +36,7 @@ namespace Xamarin.Forms.SampleApp
 			Ioc = Container;
 
 			//initialize the repo connection (create tables if necessary)
-			var repo = Ioc.Resolve<IRepository>();
-			await repo.InitializeAsync();
+			Ioc.Resolve<IRepository>().Initialize();
 
 			await NavigationService.NavigateAsync("MainPage/NavigationPageBase/TodoItemsPage");
 		}
