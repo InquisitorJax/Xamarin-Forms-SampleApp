@@ -21,7 +21,7 @@ namespace Xamarin.Forms.SampleApp.ViewModels
 
 		private ObservableCollection<TodoItem> _todoItems;
 
-		public MainPageViewModel(IRepository repository)
+		public MainPageViewModel(IRepository repository, INavigationService navigation) : base(navigation)
 		{
 			_repo = repository;
 			OpenSelectedTodoItemCommand = new DelegateCommand(OpenSelectedTodoItem);
@@ -35,6 +35,14 @@ namespace Xamarin.Forms.SampleApp.ViewModels
 		{
 			get { return _todoItems; }
 			set { SetProperty(ref _todoItems, value); }
+		}
+
+		private bool _isRefreshing;
+
+		public bool IsRefreshing
+		{
+			get { return _isRefreshing; }
+			set { SetProperty(ref _isRefreshing, value); }
 		}
 
 		private TodoItem _selectedItem;
@@ -75,15 +83,24 @@ namespace Xamarin.Forms.SampleApp.ViewModels
 
 		private async Task LoadTodoItemsAsync()
 		{
-			var itemsResult = await _repo.FetchItemsAsync<TodoItem>();
-			if (itemsResult.IsValid())
+			try
 			{
-				TodoItems = itemsResult.ModelCollection.AsObservableCollection();
+				IsRefreshing = true;
 
-				if (!TodoItems.Any())
+				var itemsResult = await _repo.FetchItemsAsync<TodoItem>();
+				if (itemsResult.IsValid())
 				{
-					TodoItems.Add(new TodoItem { Text = "Ghost Item" });
+					TodoItems = itemsResult.ModelCollection.AsObservableCollection();
+
+					if (!TodoItems.Any())
+					{
+						TodoItems.Add(new TodoItem { Text = "Ghost Item" });
+					}
 				}
+			}
+			finally
+			{
+				IsRefreshing = false;
 			}
 		}
 	}

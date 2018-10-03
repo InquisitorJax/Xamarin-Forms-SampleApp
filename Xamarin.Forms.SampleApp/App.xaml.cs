@@ -26,11 +26,7 @@ namespace Xamarin.Forms.SampleApp
 		{
 		}
 
-		//public static INavigationService Navigation => Ioc.Resolve<INavigationService>();
-
 		public static IContainerProvider Ioc { get; private set; }
-
-		public static INavigationService Navigation { get; private set; }
 
 		public static IEventAggregator EventManager => Ioc.Resolve<IEventAggregator>();
 
@@ -39,7 +35,6 @@ namespace Xamarin.Forms.SampleApp
 			InitializeComponent();
 
 			Ioc = Container;
-			Navigation = NavigationService;
 
 			//initialize the repo connection (create tables if necessary)
 			var repo = Ioc.Resolve<IRepository>();

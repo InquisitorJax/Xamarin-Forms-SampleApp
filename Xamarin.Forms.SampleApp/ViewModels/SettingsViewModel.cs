@@ -7,7 +7,7 @@ namespace Xamarin.Forms.SampleApp.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
     {
-		public SettingsViewModel()
+		public SettingsViewModel(INavigationService navigation) : base(navigation)
 		{
 
 		}

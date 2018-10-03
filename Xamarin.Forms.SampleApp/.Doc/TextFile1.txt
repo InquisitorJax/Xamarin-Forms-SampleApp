@@ -1,8 +1,11 @@
 ﻿Prism Library (navigation / Ioc / event aggregation)
-Offline Repository
+https://prismlibrary.github.io/docs/xamarin-forms/Getting-Started.html
+
+Offline Repository with Sqlite
 
 Todo:
-Global Exception Managements
+Model Validation
+Global Exception Management
 Logging
 Localization
 Theme Support

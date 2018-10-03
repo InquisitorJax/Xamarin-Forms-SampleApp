@@ -15,7 +15,7 @@ namespace Xamarin.Forms.SampleApp.ViewModels
 		private bool _isNewModel;
 		private TodoItem _model;
 
-		public TodoItemViewModel(IRepository repository)
+		public TodoItemViewModel(IRepository repository, INavigationService navigation) : base(navigation)
 		{
 			_repository = repository;
 			SaveItemCommand = new DelegateCommand(SaveItem);
@@ -68,7 +68,7 @@ namespace Xamarin.Forms.SampleApp.ViewModels
 			{
 				ModelUpdatedMessageResult<TodoItem> eventResult = new ModelUpdatedMessageResult<TodoItem> { UpdatedModel = Model, UpdateEvent = updateEvent };
 				App.EventManager.GetEvent<ModelUpdatedMessageEvent<TodoItem>>().Publish(eventResult);
-				await App.Navigation.GoBackAsync(); //NOTE: fails :( will work if INavigationService injected in constructor
+				await Navigation.GoBackAsync(); //NOTE: fails :( will work if INavigationService injected in constructor
 			}
 			else
 			{
