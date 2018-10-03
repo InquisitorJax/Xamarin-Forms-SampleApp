@@ -6,7 +6,6 @@ namespace Xamarin.Forms.SampleApp.Models
 {
 	public abstract class ModelBase : BindableBase
 	{
-
 		public ModelBase()
 		{
 			_id = Guid.NewGuid().ToString();

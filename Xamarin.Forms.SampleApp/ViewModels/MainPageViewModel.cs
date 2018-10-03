@@ -4,20 +4,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms.SampleApp.Extensions;
+using Xamarin.Forms.SampleApp.Messages;
 using Xamarin.Forms.SampleApp.Models;
 using Xamarin.Forms.SampleApp.Views;
+using static Xamarin.Forms.SampleApp.Constants;
 
 namespace Xamarin.Forms.SampleApp.ViewModels
 {
-	public class MainPageViewModel : ViewModelBase, INavigationAware
+	public class MainPageViewModel : ViewModelBase
 	{
 		private readonly IRepository _repo;
+		private SubscriptionToken _modelUpdatedEventToken;
 
 		private ObservableCollection<TodoItem> _todoItems;
 
-		public MainPageViewModel(IRepository repository, INavigationService navigation) : base(navigation)
+		public MainPageViewModel(IRepository repository)
 		{
 			_repo = repository;
 			OpenSelectedTodoItemCommand = new DelegateCommand(OpenSelectedTodoItem);
@@ -41,24 +45,26 @@ namespace Xamarin.Forms.SampleApp.ViewModels
 			set { SetProperty(ref _selectedItem, value); }
 		}
 
-		public void OnNavigatedFrom(NavigationParameters parameters)
+		public async override void OnNavigatingTo(NavigationParameters parameters)
 		{
-			//nothing
-		}
-
-		public void OnNavigatedTo(NavigationParameters parameters)
-		{
-			//nothing
-		}
-
-		public async void OnNavigatingTo(NavigationParameters parameters)
-		{
+			_modelUpdatedEventToken = App.EventManager.GetEvent<ModelUpdatedMessageEvent<TodoItem>>().Subscribe(OnTodoItemUpdated);
 			await LoadTodoItemsAsync();
+		}
+
+		public override void OnNavigatedFrom(NavigationParameters parameters)
+		{
+			App.EventManager.GetEvent<ModelUpdatedMessageEvent<TodoItem>>().Unsubscribe(_modelUpdatedEventToken);
+		}
+
+		private void OnTodoItemUpdated(ModelUpdatedMessageResult<TodoItem> updateResult)
+		{
+			TodoItems.UpdateCollection(updateResult.UpdatedModel, updateResult.UpdateEvent);
 		}
 
 		private void OpenSelectedTodoItem()
 		{
-			NavigationParameters.Add("Model", SelectedItem);
+			//NOTE: ID passed as string value to support url query navigation as well
+			NavigationParameters.Add(NavigationParameterName.ModelId, SelectedItem.Id);
 			NavigateCommand.Execute($"{ViewKeys.Prefix}{ViewKeys.TodoItemPage}");
 		}
 
