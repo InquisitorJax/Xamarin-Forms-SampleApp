@@ -9,7 +9,7 @@ namespace Xamarin.Forms.SampleApp.Controls
 	public class ListViewEx : ListView
 	{
 		
-		public static BindableProperty ItemTapCommandProperty = BindableProperty.Create("ItemTapCommand", typeof(ICommand), typeof(ListView), null);
+		public static BindableProperty ItemTapCommandProperty = BindableProperty.Create(nameof(ItemTapCommand), typeof(ICommand), typeof(ListView), null);
 
 		public ListViewEx()
 		{
