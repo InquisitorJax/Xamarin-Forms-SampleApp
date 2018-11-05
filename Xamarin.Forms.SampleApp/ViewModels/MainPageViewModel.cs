@@ -53,13 +53,13 @@ namespace Xamarin.Forms.SampleApp.ViewModels
 			set { SetProperty(ref _selectedItem, value); }
 		}
 
-		public async override void OnNavigatingTo(NavigationParameters parameters)
+		public async override void OnNavigatingTo(INavigationParameters parameters)
 		{
 			_modelUpdatedEventToken = App.EventManager.GetEvent<ModelUpdatedMessageEvent<TodoItem>>().Subscribe(OnTodoItemUpdated);
 			await LoadTodoItemsAsync();
 		}
 
-		public override void OnNavigatedFrom(NavigationParameters parameters)
+		public override void OnNavigatedFrom(INavigationParameters parameters)
 		{
 			App.EventManager.GetEvent<ModelUpdatedMessageEvent<TodoItem>>().Unsubscribe(_modelUpdatedEventToken);
 		}

@@ -15,13 +15,13 @@
 
   <ItemGroup>
     <PackageReference Include="NLog" Version="4.5.10" />
-    <PackageReference Include="Prism.DryIoc.Forms" Version="7.0.0.396" />
-    <PackageReference Include="Prism.Forms" Version="7.0.0.396" />
-    <PackageReference Include="Prism.Plugin.Popups.DryIoc" Version="1.1.0" />
+    <PackageReference Include="Prism.DryIoc.Forms" Version="7.1.0.431" />
+    <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
+    <PackageReference Include="Prism.Plugin.Popups" Version="2.1.0.228" />
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
     <PackageReference Include="Wibci.LogicCommand" Version="2.0.0" />
     <PackageReference Include="Wibci.Xamarin.Forms.Converters" Version="2.0.0" />
-    <PackageReference Include="Xamarin.Forms" Version="3.2.0.871581" />
+    <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
   </ItemGroup>
 
   <ItemGroup>

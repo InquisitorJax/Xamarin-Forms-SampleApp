@@ -29,7 +29,7 @@ namespace Xamarin.Forms.SampleApp.ViewModels
 			set { SetProperty(ref _model, value); }
 		}
 
-		public override async void OnNavigatingTo(NavigationParameters parameters)
+		public override async void OnNavigatingTo(INavigationParameters parameters)
 		{
 			//TODO: should be string ID, and get from the repo
 			if (parameters.ContainsKey(NavigationParameterName.ModelId))
@@ -37,9 +37,9 @@ namespace Xamarin.Forms.SampleApp.ViewModels
 				string id = (string)parameters[NavigationParameterName.ModelId];
 				var fetchResult = await _repository.FetchItemAsync<TodoItem>(id);
 				if (fetchResult.IsValid())
-				{
-					Console.WriteLine($"w00t! You sent a model! {Model.Text}");
+				{					
 					Model = fetchResult.Model;
+					Console.WriteLine($"w00t! You sent a model! {Model.Text}");
 				}
 				else
 				{

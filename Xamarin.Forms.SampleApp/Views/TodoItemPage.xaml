@@ -18,10 +18,8 @@
 
 	<ContentPage.Content>
 		<Editor Text="{Binding Model.Text}" 
-				FontSize="Large" 
-				HorizontalOptions="Center"
-				MinimumWidthRequest="400"
-				MinimumHeightRequest="100"
+				FontSize="Large" 				
+				MinimumHeightRequest="200"
 				VerticalOptions="Center" />
 	</ContentPage.Content>
 </ContentPage>
